@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div>
+  <h1>Cloud9</h1>
+  {% if servers|length < 1 %}
+  <p>There is nothing to add.</p>
+  {% else %}
+  <table>
+    <thead>
+      <tr>
+        <th>Server</th>
+        <th>Added</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for server in servers %}
+      <tr>
+        <td>{{ server.server_type }}</td>
+	<td>{{ server.server_brand }}</td>
+	<td>{{ server.server_model }}</td>
+	<td>{{ server.server_specs }}</td>
+	<td>{{ server.business_type }}</td>
+	<td>{{ server.current_server_wattage }}</td>
+        <td>{{ server.created_at.date() }}</td>
+	<td class="text-right"><a class="btn btn-danger btn-sm" href="" role="button">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  <form action="/" method="POST">
+    <label for="server_type">Server Type:</label>
+    <input type="text" name="server_type" id="server_type">
+
+    <label for="server_brand">Server Brand:</label>
+    <input type="text" name="server_brand" id="server_brand">
+
+    <label for="server_model">Server Model:</label>
+    <input type="text" name="server_model" id="server_model">
+
+    <label for="server_specs">Server Specs:</label>
+    <input type="text" name="server_specs" id="server_specs">
+
+    <label for="current_server_wattage">Current Server Wattage:</label>
+    <input type="text" name="current_server_wattage" id="current_server_wattage">
+
+    <label for="business_type">Business Type:</label>
+    <input type="text" name="business_type" id="business_type">
+
+    <button type="submit">Add</button>
+  </form>
+</div>
+{% endblock content %}
